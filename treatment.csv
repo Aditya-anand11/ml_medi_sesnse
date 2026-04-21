@@ -1,0 +1,37 @@
+Disease,Medication_1,Medication_2,Lifestyle_Advice
+common cold,Paracetamol,Antihistamines,Drink warm fluids and rest
+flu,Oseltamivir,Paracetamol,Stay hydrated and rest
+acute bronchitis,Paracetamol,Cough suppressants,Avoid smoking and rest
+asthma,Albuterol,Inhaled corticosteroids,Avoid triggers like dust and smoke
+pneumonia,Azithromycin,Levofloxacin,Seek medical care and rest
+tuberculosis,Isoniazid,Rifampin,Complete full treatment course
+migraine,Sumatriptan,Ibuprofen,Rest in dark quiet room
+tension headache,Ibuprofen,Paracetamol,Reduce stress and rest
+hypertension,Amlodipine,Lisinopril,Reduce salt intake and exercise
+diabetes,Metformin,Insulin,Maintain low sugar diet
+anemia,Iron supplements,Folic acid,Eat iron rich foods
+gastritis,Omeprazole,Antacids,Avoid spicy food
+gerd,Omeprazole,Famotidine,Do not lie down after meals
+peptic ulcer disease,Amoxicillin,Clarithromycin,Avoid alcohol and caffeine
+urinary tract infection,Nitrofurantoin,Fosfomycin,Drink plenty of water
+kidney stone,Ibuprofen,Tamsulosin,Increase water intake
+allergy,Cetirizine,Loratadine,Avoid allergens
+skin rash,Hydrocortisone,Antihistamines,Keep skin clean
+eczema,Moisturizers,Topical steroids,Avoid irritants
+acne,Benzoyl peroxide,Salicylic acid,Keep skin clean
+dengue,Paracetamol,IV fluids,Stay hydrated and monitor platelets
+malaria,Chloroquine,Artemether,Use mosquito nets
+typhoid,Azithromycin,Ciprofloxacin,Drink clean water
+hepatitis,Supportive care,Antivirals,Avoid alcohol
+arthritis,Naproxen,Methotrexate,Exercise regularly
+osteoarthritis,Acetaminophen,Naproxen,Low impact exercise
+depression,SSRIs,Cognitive therapy,Stay active and seek support
+anxiety,Benzodiazepines,SSRIs,Practice relaxation techniques
+insomnia,Melatonin,Zolpidem,Maintain sleep schedule
+conjunctivitis,Antibiotic drops,Lubricating drops,Avoid touching eyes
+sinusitis,Decongestants,Antibiotics,Steam inhalation
+bronchial asthma,Albuterol,Salmeterol,Avoid dust and smoke
+chickenpox,Acyclovir,Paracetamol,Avoid scratching
+meningitis,Antibiotics,Antivirals,Immediate hospital care
+stroke,Aspirin,Clot busters,Emergency treatment required
+heart attack,Aspirin,Nitroglycerin,Seek emergency help

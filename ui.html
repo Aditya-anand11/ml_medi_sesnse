@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediSense - Symptom Checker</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#e2e2eb",
+                        "surface-container-low": "#191b22",
+                        "on-secondary-container": "#b0b2ff",
+                        "outline-variant": "#3e484f",
+                        "on-error-container": "#ffdad6",
+                        "inverse-surface": "#e2e2eb",
+                        "primary": "#8ed5ff",
+                        "on-secondary-fixed": "#07006c",
+                        "on-surface": "#e2e2eb",
+                        "primary-fixed": "#c4e7ff",
+                        "on-secondary-fixed-variant": "#2f2ebe",
+                        "surface-container-high": "#282a30",
+                        "background": "#111319",
+                        "tertiary-fixed-dim": "#ffb960",
+                        "on-tertiary-container": "#613b00",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "error": "#ffb4ab",
+                        "on-primary": "#00354a",
+                        "surface-container": "#1e1f26",
+                        "on-primary-container": "#004965",
+                        "inverse-on-surface": "#2e3037",
+                        "surface-bright": "#373940",
+                        "on-tertiary": "#472a00",
+                        "surface": "#111319",
+                        "primary-fixed-dim": "#7bd0ff",
+                        "secondary": "#c0c1ff",
+                        "primary-container": "#38bdf8",
+                        "surface-variant": "#33343b",
+                        "secondary-container": "#3131c0",
+                        "on-primary-fixed": "#001e2c",
+                        "on-tertiary-fixed": "#2a1700",
+                        "surface-tint": "#7bd0ff",
+                        "secondary-fixed-dim": "#c0c1ff",
+                        "secondary-fixed": "#e1e0ff",
+                        "tertiary-fixed": "#ffddb8",
+                        "surface-container-highest": "#33343b",
+                        "surface-container-lowest": "#0c0e14",
+                        "inverse-primary": "#00668a",
+                        "on-primary-fixed-variant": "#004c69",
+                        "on-error": "#690005",
+                        "surface-dim": "#111319",
+                        "outline": "#87929a",
+                        "tertiary": "#ffc176",
+                        "on-surface-variant": "#bdc8d1",
+                        "error-container": "#93000a",
+                        "tertiary-container": "#f1a02b",
+                        "on-secondary": "#1000a9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pulse-loader {
+            box-shadow: 0 0 0 0 rgba(142, 213, 255, 0.4);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(142, 213, 255, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(142, 213, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(142, 213, 255, 0); }
+        }
+        .ai-glow {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(49, 49, 192, 0.05));
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body overflow-x-hidden selection:bg-primary/30">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full z-50 flex justify-between items-center px-6 py-4 bg-surface/70 backdrop-blur-xl shadow-[0_0_32px_rgba(142,213,255,0.06)] font-['Inter'] tracking-tight leading-tight">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tighter text-cyan-400">MediSense Ai</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-slate-400 hover:bg-cyan-500/10 transition-colors p-2 rounded-full cursor-pointer active:scale-95 duration-200" data-icon="account_circle">account_circle</span>
+<span class="material-symbols-outlined text-slate-400 hover:bg-cyan-500/10 transition-colors p-2 rounded-full cursor-pointer active:scale-95 duration-200" data-icon="settings">settings</span>
+</div>
+</header>
+<div class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-full fixed left-0 top-0 w-72 bg-surface-container-low font-['Inter'] text-sm tracking-wide z-40 pt-20">
+<div class="px-6 py-6 border-b border-outline-variant/10">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 rounded-xl bg-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="clinical_notes">clinical_notes</span>
+</div>
+<div>
+<h2 class="text-lg font-black text-cyan-400">Clinical Intelligence</h2>
+<p class="text-[10px] text-slate-400 uppercase tracking-widest">ML Models: Active • DB: Connected</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 py-6 space-y-2">
+<!-- Active Item: Symptom Checker -->
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl bg-gradient-to-br from-cyan-900/40 to-cyan-400/10 text-cyan-400 border-r-2 border-cyan-400 transition-all ease-out duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="medical_services">medical_services</span>
+<span class="font-semibold">Symptom Checker</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-surface-container transition-all ease-out duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span>Analysis History</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-surface-container transition-all ease-out duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span>Health Profile</span>
+</a>
+</nav>
+<div class="px-4 py-6 space-y-6">
+<!-- CTA Card -->
+<div class="p-4 rounded-2xl bg-surface-container-high/50 border border-outline-variant/10">
+<p class="text-xs text-on-surface-variant mb-3">Optimize your clinical data flow with our latest AI updates.</p>
+<button class="w-full py-2 bg-primary-container text-on-primary-fixed text-xs font-bold rounded-lg hover:brightness-110 transition-all">View Clinical Tips</button>
+</div>
+<div class="space-y-3">
+<a class="flex items-center gap-3 px-4 text-slate-400 hover:text-cyan-400 text-xs" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="security">security</span>
+<span>Privacy Policy</span>
+</a>
+<a class="flex items-center gap-3 px-4 text-slate-400 hover:text-cyan-400 text-xs" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="help">help</span>
+<span>Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 md:ml-72 flex flex-col min-h-screen">
+<!-- Hero Section -->
+<section class="px-6 pt-12 pb-8 max-w-5xl mx-auto w-full">
+<div class="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-6">
+<span class="text-[10px] font-bold text-primary uppercase tracking-[0.1em]">⚕ AI-Powered · Clinical Grade</span>
+</div>
+<h1 class="text-5xl md:text-6xl font-black tracking-tight text-on-surface mb-4">HealthAI Assistant</h1>
+<p class="text-lg text-on-surface-variant max-w-2xl font-light leading-relaxed">
+                    Navigate your symptoms with clinical precision. Our models analyze thousands of medical records to provide empathetic, data-driven insights.
+                </p>
+</section>
+<!-- Chat Container -->
+<section class="flex-1 px-6 pb-24 max-w-5xl mx-auto w-full flex flex-col">
+<div class="space-y-8 flex-1">
+<!-- Assistant Message -->
+<div class="flex gap-4 group">
+<div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary-container to-primary flex-shrink-0 flex items-center justify-center shadow-[0_0_20px_rgba(142,213,255,0.3)]">
+<span class="material-symbols-outlined text-on-primary-container text-xl" data-icon="smart_toy">smart_toy</span>
+</div>
+<div class="max-w-[80%] ai-glow p-6 rounded-2xl rounded-tl-none border border-outline-variant/10 shadow-lg">
+<p class="text-on-surface leading-relaxed">👋 Welcome! Please describe at least 3 symptoms you're experiencing, including when they started and any specific sensations you're feeling.</p>
+<div class="mt-4 flex gap-2">
+<span class="px-3 py-1 rounded-full bg-surface-container text-[11px] text-primary border border-primary/20">Headache</span>
+<span class="px-3 py-1 rounded-full bg-surface-container text-[11px] text-primary border border-primary/20">Fever</span>
+<span class="px-3 py-1 rounded-full bg-surface-container text-[11px] text-primary border border-primary/20">Fatigue</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="fixed bottom-24 md:bottom-12 left-0 md:left-72 right-0 px-6">
+<div class="max-w-5xl mx-auto relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+<div class="relative flex items-center gap-4 bg-surface-container-lowest border border-outline-variant/20 p-2 pl-6 rounded-2xl backdrop-blur-md shadow-2xl">
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-slate-600 font-body" placeholder="e.g., I have a sharp pain in my lower back since yesterday..." type="text"/>
+<div class="flex items-center gap-2 pr-2">
+<button class="w-12 h-12 flex items-center justify-center rounded-xl bg-primary text-on-primary pulse-loader hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="send" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Desktop Content Side Rail (Asymmetric Design Element) -->
+<div class="hidden xl:block w-80 p-8 border-l border-outline-variant/5 bg-surface-container-lowest/50">
+<h3 class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-6">Real-time Context</h3>
+<div class="space-y-6">
+<div class="p-4 rounded-2xl bg-surface-container-low border border-outline-variant/10">
+<div class="flex items-center gap-2 mb-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[11px] font-bold text-on-surface">Precision Scan</span>
+</div>
+<img class="w-full h-32 object-cover rounded-lg opacity-60 mb-3" data-alt="Abstract clinical data visualization with glowing blue nodes and network connections on a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwfttJ41O8z5DY_AJjmRlmvHcHiyYlAxWkDUxbOW7BdOuaXU3uUUU5eL8kBFhA0xAV8aQNgMGj1epD_eLKPlCq8G16IoBHdV_0mqt2nQq-g_l2-0-0Cu3w4XSP7GVLEKopkLI8jmWhCJIlJfQv3TbTr8SzJw1Ip1JF-TC2mg3WEVWh9-cK7jXyO5gOHhh_cGdg_hEhkfvmDT7DdAu11qLosyB84SnBt9pNy57R3imY_D12BIU-KcEqokpRVQKF21GzLfsa-h2k-9IZ"/>
+<p class="text-xs text-on-surface-variant leading-relaxed">System is currently aggregating localized health trends for more accurate diagnostic suggestions.</p>
+</div>
+<div class="p-4 rounded-2xl bg-surface-container-low border border-outline-variant/10">
+<span class="text-[10px] text-cyan-400 font-black uppercase mb-1 block">Did you know?</span>
+<p class="text-xs text-on-surface leading-relaxed">Hydration levels can significantly alter the presentation of migraine symptoms.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-surface/80 backdrop-blur-lg shadow-[0_-8px_24px_rgba(142,213,255,0.04)] font-['Inter'] text-[10px] uppercase tracking-[0.05em] rounded-t-2xl">
+<a class="flex flex-col items-center justify-center bg-cyan-500/20 text-cyan-400 rounded-xl px-4 py-1 active:scale-95 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined mb-0.5" data-icon="health_metrics">health_metrics</span>
+<span>Checker</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 active:scale-95 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined mb-0.5" data-icon="folder_managed">folder_managed</span>
+<span>History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 active:scale-95 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined mb-0.5" data-icon="account_box">account_box</span>
+<span>Profile</span>
+</a>
+</nav>
+<!-- KEEP EVERYTHING SAME ABOVE -->
+
+<!-- ADD THIS SCRIPT JUST BEFORE </body> -->
+
+<script>
+const inputBox = document.querySelector("input");
+const sendBtn = document.querySelector("button");
+const chatContainer = document.querySelector(".space-y-8");
+
+// ENTER KEY SUPPORT
+inputBox.addEventListener("keypress", function(e) {
+    if (e.key === "Enter") sendMessage();
+});
+
+sendBtn.addEventListener("click", sendMessage);
+
+async function sendMessage() {
+    const text = inputBox.value.trim();
+    if (!text) return;
+
+    addUserMessage(text);
+    inputBox.value = "";
+
+    const loading = addBotMessage("⏳ Analyzing your symptoms...");
+
+    try {
+        const res = await fetch("http://127.0.0.1:5000/predict", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ text })
+        });
+
+        const data = await res.json();
+
+        loading.remove();
+        addBotMessage(data.response);
+
+    } catch (err) {
+        loading.remove();
+        addBotMessage("⚠️ Backend not running. Start Flask server.");
+    }
+}
+
+// ---------------- UI MESSAGE BUILDERS ----------------
+
+function addUserMessage(text) {
+    const msg = document.createElement("div");
+    msg.className = "flex gap-4 justify-end";
+
+    msg.innerHTML = `
+        <div class="max-w-[70%] p-4 rounded-2xl bg-cyan-500/20 border border-cyan-400 text-cyan-200">
+            ${text}
+        </div>
+    `;
+
+    chatContainer.appendChild(msg);
+    scrollDown();
+}
+
+function addBotMessage(text) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "flex gap-4";
+
+    wrapper.innerHTML = `
+        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary-container to-primary flex items-center justify-center">
+            🤖
+        </div>
+        <div class="max-w-[80%] ai-glow p-6 rounded-2xl rounded-tl-none border border-outline-variant/10">
+            <p class="leading-relaxed">${text}</p>
+        </div>
+    `;
+
+    chatContainer.appendChild(wrapper);
+    scrollDown();
+
+    return wrapper;
+}
+
+function scrollDown() {
+    window.scrollTo(0, document.body.scrollHeight);
+}
+</script>
+</body></html>
